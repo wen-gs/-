@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>遇见你 | 关于我</title>
+    <!-- 优化1：微信分享 Meta 标签 -->
+    <meta name="description" content="你好，我是 G 先生。186cm / IT 岗，稳重踏实，期待遇见同样热爱生活的你。">
+    <meta property="og:title" content="遇见你 | 个人介绍">
+    <meta property="og:description" content="186cm / 稳定 IT 岗 / 热爱运动 / 性格稳重">
+    <meta property="og:image" content="assets/hero_bg.png">
+    <meta property="og:type" content="website">
+    
     <link rel="stylesheet" href="style.css">
     <!-- 引入Lucide图标库 -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- 引入ScrollReveal实现滚动动画 -->
     <script src="https://unpkg.com/scrollreveal"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
-<body>
+
+<body class="loading-active">
+    <!-- 进阶优化：全屏仪式感加载层 -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="heart-container">
+                <i data-lucide="heart" fill="currentColor"></i>
+            </div>
+            <p class="loader-text">正在开启一份真诚的介绍...</p>
+        </div>
+    </div>
+
     <div class="app-container">
         <!-- 封面模块 -->
         <header class="hero" id="hero">
@@ -23,14 +43,14 @@
                         <i data-lucide="user"></i>
                     </div>
                 </div>
-                <h1 class="name">你好，我是 <span class="highlight">G先生</span></h1>
+                <h1 class="name">你好，我是 <span class="highlight">文高升</span></h1>
                 <p class="subtitle">95年 / 186cm / IT从业者</p>
                 <div class="tags">
                     <span class="tag">稳重踏实</span>
                     <span class="tag">健康生活</span>
                     <span class="tag">热爱运动</span>
                 </div>
-                
+
                 <div class="scroll-indicator">
                     <span>向下滑动</span>
                     <i data-lucide="chevron-down" class="bounce"></i>
@@ -96,10 +116,20 @@
             </div>
         </section>
 
+        <!-- 优化4：精简生活相册 (3张图) -->
+        <section class="section side-gallery" id="gallery">
+            <h2 class="section-title">生活剪影 <span class="dot"></span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="assets/photo-1.png" alt="生活照1" class="zoomable"></div>
+                <div class="gallery-item"><img src="assets/photo-2.png" alt="生活照2" class="zoomable"></div>
+                <div class="gallery-item"><img src="assets/photo-3.png" alt="生活照3" class="zoomable"></div>
+            </div>
+        </section>
+
         <!-- 关于我模块 -->
         <section class="section about-me alternate-bg" id="about">
             <h2 class="section-title">关于我 <span class="dot"></span></h2>
-            
+
             <div class="about-block">
                 <h3><i data-lucide="compass"></i> 性格与生活习惯</h3>
                 <p>性格沉稳踏实。生活圈子简单干净，生活习惯非常健康，<strong>绝对不抽烟、不喝酒、不吃槟榔。</strong></p>
@@ -113,7 +143,7 @@
                         <p>业余时间喜欢打羽毛球、跳绳、散步健走等运动，保持良好的体魄。</p>
                     </div>
                 </div>
-                
+
                 <div class="hobby-item reverse">
                     <img src="assets/hobby_work.png" alt="理财投资" class="hobby-img">
                     <div class="hobby-content">
@@ -151,17 +181,31 @@
             <h2>期待遇见你</h2>
             <p>如果你觉得我们合适，欢迎联系我</p>
             <div class="contact-box">
-                <div class="qr-placeholder">
-                    <i data-lucide="qr-code"></i>
-                    <p>微信二维码</p>
+                <div class="qr-image-container">
+                    <!-- 提示：请将您的二维码图片命名为 wechat-qr.png 放入 assets 文件夹 -->
+                    <img src="assets/wechat-qr.png" alt="微信二维码" class="qr-code-img">
+                    <p>扫码加我微信</p>
                 </div>
                 <div class="copy-wechat">
-                    <span id="wechat-id">WechatID_12345</span> <!-- 占位微信号 -->
+                    <span id="wechat-id">Abcd9981003</span>
                     <button id="copy-btn"><i data-lucide="copy"></i> 复制微信号</button>
                 </div>
             </div>
         </footer>
     </div>
+
+    <!-- 优化2：悬浮快速连接按钮 -->
+    <div id="fab-connect" class="fab">
+        <i data-lucide="heart" fill="currentColor"></i>
+    </div>
+
+    <!-- 图片大图预览遮罩层 -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
     <script src="main.js"></script>
 </body>
+
 </html>
