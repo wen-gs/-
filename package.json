@@ -1,0 +1,35 @@
+{
+  "name": "matchmaking-profile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "playwright test",
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext .js,.cjs",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wen-gs/-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wen-gs/-/issues"
+  },
+  "homepage": "https://github.com/wen-gs/-#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "eslint": "^10.1.0",
+    "eslint-plugin-html": "^8.1.4",
+    "prettier": "^3.8.1",
+    "vite": "^8.0.3"
+  },
+  "dependencies": {
+    "lucide": "^1.7.0",
+    "scrollreveal": "^4.0.9"
+  }
+}

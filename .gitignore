@@ -1,0 +1,25 @@
+node_modules
+/.pnp
+.pnp.js
+
+/dist
+/dist-ssr
+
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
