@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>遇见你 | 关于我</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入Lucide图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- 引入ScrollReveal实现滚动动画 -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 封面模块 -->
+        <header class="hero" id="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="avatar-container">
+                    <!-- 占位头像，用户可自行替换真实照片 -->
+                    <div class="avatar-placeholder">
+                        <i data-lucide="user"></i>
+                    </div>
+                </div>
+                <h1 class="name">你好，我是 <span class="highlight">G先生</span></h1>
+                <p class="subtitle">95年 / 186cm / IT从业者</p>
+                <div class="tags">
+                    <span class="tag">稳重踏实</span>
+                    <span class="tag">健康生活</span>
+                    <span class="tag">热爱运动</span>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <span>向下滑动</span>
+                    <i data-lucide="chevron-down" class="bounce"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- 基本情况模块 -->
+        <section class="section basic-info" id="info">
+            <h2 class="section-title">基本情况 <span class="dot"></span></h2>
+            <div class="cards-grid">
+                <div class="info-card">
+                    <div class="icon-wrapper"><i data-lucide="calendar-heart"></i></div>
+                    <div class="card-detail">
+                        <p class="label">年龄</p>
+                        <p class="value">95年 (31岁)</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="icon-wrapper"><i data-lucide="ruler"></i></div>
+                    <div class="card-detail">
+                        <p class="label">身高体重</p>
+                        <p class="value">186cm / 85kg<br><span class="desc">身材高大 端正</span></p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="icon-wrapper"><i data-lucide="graduation-cap"></i></div>
+                    <div class="card-detail">
+                        <p class="label">学历</p>
+                        <p class="value">本科</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="icon-wrapper"><i data-lucide="map-pin"></i></div>
+                    <div class="card-detail">
+                        <p class="label">籍贯/现居</p>
+                        <p class="value">运城万荣人<br><span class="desc">定居盐湖区</span></p>
+                    </div>
+                </div>
+                <div class="info-card full-width">
+                    <div class="icon-wrapper"><i data-lucide="briefcase"></i></div>
+                    <div class="card-detail">
+                        <p class="label">职业</p>
+                        <p class="value">市政务中心·信息化技术岗</p>
+                        <p class="desc">（负责软件交付与技术支持，工作稳定）</p>
+                    </div>
+                </div>
+                <div class="info-card full-width">
+                    <div class="icon-wrapper"><i data-lucide="home"></i></div>
+                    <div class="card-detail">
+                        <p class="label">资产情况</p>
+                        <p class="value">盐湖区已购房、有车</p>
+                    </div>
+                </div>
+                <div class="info-card full-width">
+                    <div class="icon-wrapper"><i data-lucide="users"></i></div>
+                    <div class="card-detail">
+                        <p class="label">家庭成员</p>
+                        <p class="value">父母健康，家庭开明和睦</p>
+                        <p class="desc">家有两妹，大妹已实习即将独立，小妹优学上进</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我模块 -->
+        <section class="section about-me alternate-bg" id="about">
+            <h2 class="section-title">关于我 <span class="dot"></span></h2>
+            
+            <div class="about-block">
+                <h3><i data-lucide="compass"></i> 性格与生活习惯</h3>
+                <p>性格沉稳踏实。生活圈子简单干净，生活习惯非常健康，<strong>绝对不抽烟、不喝酒、不吃槟榔。</strong></p>
+            </div>
+
+            <div class="hobbies-container">
+                <div class="hobby-item">
+                    <img src="assets/hobby_badminton.png" alt="羽毛球运动" class="hobby-img">
+                    <div class="hobby-content">
+                        <h3><i data-lucide="activity"></i> 运动达人</h3>
+                        <p>业余时间喜欢打羽毛球、跳绳、散步健走等运动，保持良好的体魄。</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item reverse">
+                    <img src="assets/hobby_work.png" alt="理财投资" class="hobby-img">
+                    <div class="hobby-content">
+                        <h3><i data-lucide="trending-up"></i> 理财规划</h3>
+                        <p>喜欢研究理财和投资，有很好的储蓄习惯，为未来的生活做足准备。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 理想的她模块 -->
+        <section class="section looking-for" id="expectation">
+            <div class="looking-for-card">
+                <div class="heart-icon"><i data-lucide="heart" fill="currentColor"></i></div>
+                <h2 class="section-title center">理想的女孩 <span class="dot"></span></h2>
+                <ul class="expectation-list">
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <span><strong>发展意愿：</strong>希望你也在运城发展。</span>
+                    </li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <span><strong>性格特征：</strong>性格温柔或开朗皆可。</span>
+                    </li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <span><strong>核心期望：</strong>不仅是寻找伴侣，更希望能找到一个遇事能商量、三观一致、愿意一起经营小日子的人。</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 底部联系方式 -->
+        <footer class="footer" id="contact">
+            <h2>期待遇见你</h2>
+            <p>如果你觉得我们合适，欢迎联系我</p>
+            <div class="contact-box">
+                <div class="qr-placeholder">
+                    <i data-lucide="qr-code"></i>
+                    <p>微信二维码</p>
+                </div>
+                <div class="copy-wechat">
+                    <span id="wechat-id">WechatID_12345</span> <!-- 占位微信号 -->
+                    <button id="copy-btn"><i data-lucide="copy"></i> 复制微信号</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
