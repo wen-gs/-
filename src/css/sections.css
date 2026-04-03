@@ -644,9 +644,18 @@
   box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4);
   cursor: pointer;
   z-index: 1000;
-  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition:
+    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.2s ease;
   border: none;
   outline: none;
+}
+
+/* CSS 控制初始隐藏，防止 JS 执行前 FAB 一闪而过 */
+.fab-hidden {
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
 }
 
 .fab.capsule {
@@ -664,6 +673,19 @@
 
 .fab:active {
   transform: scale(0.94);
+}
+
+/* 复制按钮双图标切换 */
+#copy-btn .btn-icon-check {
+  display: none;
+}
+
+#copy-btn.copied .btn-icon-copy {
+  display: none;
+}
+
+#copy-btn.copied .btn-icon-check {
+  display: inline-block;
 }
 
 /* ===============================

@@ -5,6 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+  <!--
+    主题内联脚本：必须是 <head> 内第一个执行的脚本，
+    在任何 CSS 和外链资源解析前同步写入 data-theme，
+    彻底消除深色模式 FOUC。
+  -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (systemDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      // 地址栏颜色同步（theme-color meta 此时可能还未解析，用 querySelector 延迟到 DOM ready）
+      document.addEventListener('DOMContentLoaded', function () {
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1c1e' : '#ffffff');
+      }, { once: true });
+    })();
+  </script>
+
   <title>遇见你 | G先生的个人介绍</title>
   <meta name="description" content="你好，我是 G 先生。95年 / 186cm / IT技术外包，稳重踏实，期待遇见同样热爱生活的你。">
   <meta name="theme-color" content="#ffffff" id="theme-color-meta">
@@ -17,28 +36,15 @@
   <meta property="og:image" content="/-/assets/my-avatar.jpg">
   <meta property="og:type" content="website">
 
-  <!-- 字体 & 头像预加载 -->
-  <link rel="preload" href="/-/assets/my-avatar.jpg" as="image">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: preconnect 减少 DNS 耗时，display=swap 防字体阻塞渲染 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!--
-    主题内联脚本：必须放在所有 CSS 加载之前同步执行。
-    type="module" 是 deferred 的，无法在首帧前生效；
-    只有内联 <script> 才能真正消除深色模式 FOUC。
-  -->
-  <script>
-    (function () {
-      var saved = localStorage.getItem('theme');
-      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = saved ? saved : (systemDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      // 同步 theme-color meta（地址栏颜色）
-      var meta = document.getElementById('theme-color-meta');
-      if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1c1e' : '#ffffff');
-    })();
-  </script>
-  <script type="module" crossorigin src="/-/assets/index-k0xUC1ou.js"></script>
-  <link rel="stylesheet" crossorigin href="/-/assets/index-BCnG5HPL.css">
+  <!-- 头像预加载（首屏关键图） -->
+  <link rel="preload" href="/-/assets/my-avatar.jpg" as="image">
+  <script type="module" crossorigin src="/-/assets/index-VDDGLEtr.js"></script>
+  <link rel="stylesheet" crossorigin href="/-/assets/index-DIR-PjtU.css">
 </head>
 
 <body class="loading-active">
@@ -48,7 +54,7 @@
   </button>
 
   <!-- 加载动画层 -->
-  <div id="page-loader" class="page-loader">
+  <div id="page-loader" class="page-loader" role="status" aria-label="页面加载中">
     <div class="loader-content">
       <div class="heart-container" aria-hidden="true">
         <i data-lucide="heart" fill="currentColor"></i>
@@ -258,8 +264,9 @@
         <div class="copy-wechat">
           <div id="wechat-id" class="wechat-text">Abcd9981003</div>
           <button id="copy-btn" aria-label="一键复制微信号到剪贴板">
-            <i data-lucide="copy"></i>
-            <span>复制微信号</span>
+            <i data-lucide="copy" class="btn-icon-copy"></i>
+            <i data-lucide="check" class="btn-icon-check" aria-hidden="true"></i>
+            <span class="btn-label">复制微信号</span>
           </button>
         </div>
       </div>
@@ -267,8 +274,8 @@
 
   </div>
 
-  <!-- FAB 悬浮气泡 -->
-  <button id="fab-connect" class="fab capsule" aria-label="点击跳转到联系方式">
+  <!-- FAB 悬浮气泡（CSS 默认隐藏，JS 控制显示） -->
+  <button id="fab-connect" class="fab capsule fab-hidden" aria-label="点击跳转到联系方式">
     <i data-lucide="message-circle" aria-hidden="true"></i>
     <span>联系我</span>
   </button>
