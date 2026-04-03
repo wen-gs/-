@@ -4,10 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "playwright test",
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext .js,.cjs",
+    "lint": "eslint .",
     "format": "prettier --write ."
   },
   "repository": {
@@ -22,7 +21,6 @@
   },
   "homepage": "https://github.com/wen-gs/-#readme",
   "devDependencies": {
-    "@playwright/test": "^1.59.1",
     "eslint": "^10.1.0",
     "eslint-plugin-html": "^8.1.4",
     "prettier": "^3.8.1",

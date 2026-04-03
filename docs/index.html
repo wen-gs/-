@@ -2,236 +2,267 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <!-- P0: 移除 user-scalable=no，恢复页面缩放的无障碍支持 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>遇见你 | 关于我</title>
-    <meta name="description" content="你好，我是 G 先生。186cm / IT 岗，稳重踏实，期待遇见同样热爱生活的你。">
-    <meta name="theme-color" content="#3b82f6" id="theme-color-meta">
-    <meta name="robots" content="index, follow">
+  <title>遇见你 | G先生的个人介绍</title>
+  <meta name="description" content="你好，我是 G 先生。95年 / 186cm / IT技术外包，稳重踏实，期待遇见同样热爱生活的你。">
+  <meta name="theme-color" content="#ffffff" id="theme-color-meta">
+  <meta name="robots" content="index, follow">
 
-    <!-- P2: Open Graph 分享标签 -->
-    <meta property="og:url" content="/">
-    <meta property="og:title" content="遇见你 | 个人介绍">
-    <meta property="og:description" content="186cm / 稳定 IT 岗 / 热爱运动 / 性格稳重">
-    <meta property="og:image" content="/-/assets/hero_bg.png">
-    <meta property="og:type" content="website">
+  <!-- Open Graph 分享标签 -->
+  <meta property="og:url" content="/">
+  <meta property="og:title" content="遇见你 | G先生的个人介绍">
+  <meta property="og:description" content="186cm / IT技术驻场支持 / 热爱运动 / 性格稳重">
+  <meta property="og:image" content="/-/assets/my-avatar.jpg">
+  <meta property="og:type" content="website">
 
-    <!-- P1: 核心首屏大图预加载，无懒加载 -->
-    <link rel="preload" href="/-/assets/hero_bg.png" as="image">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/-/assets/index-CK-t0sMA.js"></script>
-  <link rel="stylesheet" crossorigin href="/-/assets/index-JqJg7pfF.css">
+  <!-- 字体 & 头像预加载 -->
+  <link rel="preload" href="/-/assets/my-avatar.jpg" as="image">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/-/assets/index-BoKGy2yU.js"></script>
+  <link rel="stylesheet" crossorigin href="/-/assets/index-BCnG5HPL.css">
 </head>
 
 <body class="loading-active">
-    <!-- 主题切换按钮 -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="切换深色与浅色主题" tabindex="0">
-        <i data-lucide="moon"></i>
-    </button>
+  <!-- 主题切换按钮 -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="切换深色与浅色主题" tabindex="0">
+    <i data-lucide="moon"></i>
+  </button>
 
-    <!-- 进阶优化：全屏加载层将在 window.load 完毕后立刻消失 -->
-    <div id="page-loader" class="page-loader">
-        <div class="loader-content">
-            <div class="heart-container" aria-hidden="true">
-                <i data-lucide="heart" fill="currentColor"></i>
-            </div>
-            <p class="loader-text">正在为您加载专属介绍...</p>
+  <!-- 加载动画层 -->
+  <div id="page-loader" class="page-loader">
+    <div class="loader-content">
+      <div class="heart-container" aria-hidden="true">
+        <i data-lucide="heart" fill="currentColor"></i>
+      </div>
+      <p class="loader-text">正在加载...</p>
+    </div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- ① Apple 极简首屏 -->
+    <header class="hero" id="hero">
+      <!-- 柔和渐变装饰背景 -->
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <!-- 头像 -->
+        <div class="avatar-container">
+          <img src="/-/assets/my-avatar.jpg" class="avatar-placeholder" alt="G先生个人头像" width="96" height="96">
         </div>
-    </div>
 
-    <div class="app-container">
-        <!-- 封面模块 -->
-        <header class="hero" id="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <div class="avatar-container">
-                    <!-- P1 核心信任感问题：使用了小狗的照片作为头像展示 -->
-                    <img src="/-/assets/my-avatar.jpg" class="avatar-placeholder" alt="个人头像" style="object-fit: cover;" width="80" height="80">
-                </div>
-                <h1 class="name">你好，我是 <span class="highlight">G先生</span></h1>
-                <p class="subtitle">95年 / 186cm / IT从业者</p>
-                <div class="tags">
-                    <span class="tag">稳重踏实</span>
-                    <span class="tag">健康生活</span>
-                    <span class="tag">热爱运动</span>
-                </div>
+        <!-- 大标题 + 一句话 -->
+        <h1 class="name">你好，我是 <span class="highlight">G先生</span></h1>
+        <p class="subtitle">95年 · 186cm · 运城盐湖区</p>
 
-                <div class="scroll-indicator" id="scroll-bounce" aria-hidden="true">
-                    <span>向下滑动</span>
-                    <i data-lucide="chevron-down" class="bounce-icon"></i>
-                </div>
+        <!-- 个性标签 -->
+        <div class="tags">
+          <span class="tag">稳重踏实</span>
+          <span class="tag">不烟不酒</span>
+          <span class="tag">热爱运动</span>
+        </div>
+      </div>
+
+      <!-- Apple 式核心数据统计栏 -->
+      <div class="hero-stats" role="list" aria-label="基本信息摘要">
+        <div class="hero-stat-item" role="listitem">
+          <div class="hero-stat-value">186</div>
+          <div class="hero-stat-label">身高 cm</div>
+        </div>
+        <div class="hero-stat-item" role="listitem">
+          <div class="hero-stat-value">31</div>
+          <div class="hero-stat-label">年龄 岁</div>
+        </div>
+        <div class="hero-stat-item" role="listitem">
+          <div class="hero-stat-value">本科</div>
+          <div class="hero-stat-label">学历</div>
+        </div>
+      </div>
+
+      <!-- 向下滑动提示 -->
+      <div class="scroll-indicator" id="scroll-bounce" aria-hidden="true">
+        <i data-lucide="chevron-down" class="bounce-icon"></i>
+      </div>
+    </header>
+
+    <!-- ② Notion Bento Box 基本情况 -->
+    <section class="section section-white" id="info">
+      <h2 class="section-title">基本情况 <span class="dot"></span></h2>
+
+      <div class="bento-grid">
+        <!-- 职业（大卡片，最重要优先展示）-->
+        <div class="bento-card wide highlight-card">
+          <div class="bento-icon">
+            <i data-lucide="briefcase" aria-hidden="true"></i>
+          </div>
+          <div class="bento-text">
+            <div class="bento-label">职业</div>
+            <div class="bento-value">IT 技术驻场支持</div>
+            <div class="bento-desc">市政务中心信息化项目，负责软件交付与技术支持（纯技术外包非编制内）</div>
+          </div>
+        </div>
+
+        <!-- 籍贯现居 -->
+        <div class="bento-card">
+          <div class="bento-icon">
+            <i data-lucide="map-pin" aria-hidden="true"></i>
+          </div>
+          <div class="bento-label">现居</div>
+          <div class="bento-value">运城盐湖区</div>
+          <div class="bento-desc">万荣人，已定居</div>
+        </div>
+
+        <!-- 体重 -->
+        <div class="bento-card">
+          <div class="bento-icon">
+            <i data-lucide="activity" aria-hidden="true"></i>
+          </div>
+          <div class="bento-label">体重</div>
+          <div class="bento-value">85 kg</div>
+          <div class="bento-desc">身材高大端正</div>
+        </div>
+
+        <!-- 购房置业 -->
+        <div class="bento-card wide">
+          <div class="bento-icon">
+            <i data-lucide="home" aria-hidden="true"></i>
+          </div>
+          <div class="bento-text">
+            <div class="bento-label">资产情况</div>
+            <div class="bento-value">盐湖区已购房 · 有车</div>
+          </div>
+        </div>
+
+        <!-- 家庭 -->
+        <div class="bento-card wide">
+          <div class="bento-icon">
+            <i data-lucide="users" aria-hidden="true"></i>
+          </div>
+          <div class="bento-text">
+            <div class="bento-label">家庭</div>
+            <div class="bento-value">父母健康，家庭开明和睦</div>
+            <div class="bento-desc">家有两妹，大妹已实习即将独立，小妹优学上进</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ Airbnb 生活相册 -->
+    <section class="section" id="gallery">
+      <h2 class="section-title">生活剪影 <span class="dot"></span></h2>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="/-/assets/photo-1.png" alt="阳光下在图书馆看书的日常" loading="lazy" decoding="async" width="400" height="400" class="zoomable" tabindex="0">
+          <div class="zoom-hint"><i data-lucide="zoom-in" aria-hidden="true"></i>放大</div>
+        </div>
+        <div class="gallery-item">
+          <img src="/-/assets/photo-2.png" alt="傍晚跑道上的运动鞋，热爱运动" loading="lazy" decoding="async" width="400" height="400" class="zoomable" tabindex="0">
+          <div class="zoom-hint"><i data-lucide="zoom-in" aria-hidden="true"></i>放大</div>
+        </div>
+        <div class="gallery-item">
+          <img src="/-/assets/photo-3.png" alt="旅行时拍摄的建筑" loading="lazy" decoding="async" width="400" height="400" class="zoomable" tabindex="0">
+          <div class="zoom-hint"><i data-lucide="zoom-in" aria-hidden="true"></i>放大</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ Notion 风格 关于我 -->
+    <section class="section section-white" id="about">
+      <h2 class="section-title">关于我 <span class="dot"></span></h2>
+
+      <div class="about-block">
+        <h3><i data-lucide="compass" aria-hidden="true"></i> 性格与生活习惯</h3>
+        <p>性格沉稳踏实，生活圈子简单干净，生活习惯非常健康，<strong>绝对不抽烟、不喝酒、不吃槟榔。</strong></p>
+      </div>
+
+      <div class="hobbies-container">
+        <div class="hobby-item clickable-card">
+          <img src="/-/assets/hobby_badminton.png" alt="羽毛球运动" width="500" height="281" loading="lazy" decoding="async" class="hobby-img">
+          <div class="hobby-content">
+            <h3><i data-lucide="activity" aria-hidden="true"></i> 运动达人</h3>
+            <p>业余时间喜欢打羽毛球、跳绳、散步健走，保持良好的体魄。</p>
+          </div>
+        </div>
+
+        <div class="hobby-item clickable-card">
+          <img src="/-/assets/hobby_work.png" alt="极简办公桌" width="500" height="281" loading="lazy" decoding="async" class="hobby-img">
+          <div class="hobby-content">
+            <h3><i data-lucide="trending-up" aria-hidden="true"></i> 理财规划</h3>
+            <p>喜欢研究理财和投资，有良好的储蓄习惯，为未来的生活做足准备。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ Notion Checklist 理想的另一半 -->
+    <section class="section looking-for" id="expectation">
+      <div class="looking-for-card">
+        <h2 class="looking-for-heading">理想的另一半</h2>
+        <ul class="expectation-list">
+          <li>
+            <i data-lucide="check" aria-hidden="true"></i>
+            <div>
+              <strong>发展意愿</strong>
+              希望你也在运城发展，一起经营本地的小日子。
             </div>
-        </header>
-
-        <!-- 基本情况模块 -->
-        <section class="section basic-info" id="info">
-            <h2 class="section-title">基本情况 <span class="dot"></span></h2>
-            <div class="cards-grid">
-                <div class="info-card">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="calendar-heart"></i></div>
-                    <div class="card-detail">
-                        <p class="label">年龄</p>
-                        <p class="value">95年 (31岁)</p>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="ruler"></i></div>
-                    <div class="card-detail">
-                        <p class="label">身高体重</p>
-                        <p class="value">186cm / 85kg<br><span class="desc">身材高大 端正</span></p>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="graduation-cap"></i></div>
-                    <div class="card-detail">
-                        <p class="label">学历</p>
-                        <p class="value">本科</p>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="map-pin"></i></div>
-                    <div class="card-detail">
-                        <p class="label">籍贯/现居</p>
-                        <p class="value">运城万荣人<br><span class="desc">定居盐湖区</span></p>
-                    </div>
-                </div>
-                <div class="info-card full-width">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="briefcase"></i></div>
-                    <div class="card-detail">
-                        <p class="label">职业</p>
-                        <p class="value">市政务中心·信息化技术岗</p>
-                        <p class="desc">（负责软件交付与技术支持，工作稳定）</p>
-                    </div>
-                </div>
-                <div class="info-card full-width">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="home"></i></div>
-                    <div class="card-detail">
-                        <p class="label">资产情况</p>
-                        <p class="value">盐湖区已购房、有车</p>
-                    </div>
-                </div>
-                <div class="info-card full-width">
-                    <div class="icon-wrapper" aria-hidden="true"><i data-lucide="users"></i></div>
-                    <div class="card-detail">
-                        <p class="label">家庭成员</p>
-                        <p class="value">父母健康，家庭开明和睦</p>
-                        <p class="desc">家有两妹，大妹已实习即将独立，小妹优学上进</p>
-                    </div>
-                </div>
+          </li>
+          <li>
+            <i data-lucide="check" aria-hidden="true"></i>
+            <div>
+              <strong>性格特征</strong>
+              性格温柔或开朗皆可，真诚最重要。
             </div>
-        </section>
-
-        <!-- P1/P2: 精简生活相册 (增加 width/height 和 async 规避 CLS 防抖，增加点击提示) -->
-        <section class="section side-gallery" id="gallery">
-            <h2 class="section-title">生活剪影 <span class="dot"></span></h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="/-/assets/photo-1.png" alt="阳光下在现代图书馆看书的生活瞬间照" loading="lazy" decoding="async" width="400"
-                        height="400" class="zoomable" tabindex="0">
-                    <div class="zoom-hint"><i data-lucide="zoom-in" aria-hidden="true"></i>点击放大</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/-/assets/photo-2.png" alt="傍晚跑道上的专业跑鞋，展示运动爱好" loading="lazy" decoding="async" width="400"
-                        height="400" class="zoomable" tabindex="0">
-                    <div class="zoom-hint"><i data-lucide="zoom-in" aria-hidden="true"></i>点击放大</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="/-/assets/photo-3.png" alt="现代简约风格的纯白建筑，展现旅行足迹" loading="lazy" decoding="async" width="400"
-                        height="400" class="zoomable" tabindex="0">
-                    <div class="zoom-hint"><i data-lucide="zoom-in" aria-hidden="true"></i>点击放大</div>
-                </div>
+          </li>
+          <li>
+            <i data-lucide="check" aria-hidden="true"></i>
+            <div>
+              <strong>核心期望</strong>
+              不只是寻找伴侣，更希望找到一个遇事能商量、三观一致、愿意一起把日子过好的人。
             </div>
-        </section>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-        <!-- 关于我模块 -->
-        <section class="section about-me alternate-bg" id="about">
-            <h2 class="section-title">关于我 <span class="dot"></span></h2>
+    <!-- ⑥ 底部联系方式 -->
+    <footer class="footer" id="contact">
+      <h2>期待遇见你</h2>
+      <p class="cta-text">如果觉得合适，欢迎主动联系</p>
+      <p class="hint-text">手机端长按即可保存二维码 / 或直接复制微信号</p>
 
-            <div class="about-block">
-                <h3><i data-lucide="compass" aria-hidden="true"></i> 性格与生活习惯</h3>
-                <p>性格沉稳踏实。生活圈子简单干净，生活习惯非常健康，<strong>绝对不抽烟、不喝酒、不吃槟榔。</strong></p>
-            </div>
+      <div class="contact-box">
+        <div class="qr-image-container">
+          <img src="/-/assets/wechat-qr.png" alt="G先生的微信二维码" width="170" height="170" loading="lazy" decoding="async" class="qr-code-img">
+          <p>微信扫一扫</p>
+        </div>
+        <div class="copy-wechat">
+          <div id="wechat-id" class="wechat-text">Abcd9981003</div>
+          <button id="copy-btn" aria-label="一键复制微信号到剪贴板">
+            <i data-lucide="copy"></i>
+            <span>复制微信号</span>
+          </button>
+        </div>
+      </div>
+    </footer>
 
-            <div class="hobbies-container">
-                <div class="hobby-item clickable-card">
-                    <!-- 增加了固定长宽比避免 CLS 抖动 -->
-                    <img src="/-/assets/hobby_badminton.png" alt="羽毛球运动特写" width="500" height="333" loading="lazy"
-                        decoding="async" class="hobby-img">
-                    <div class="hobby-content">
-                        <h3><i data-lucide="activity" aria-hidden="true"></i> 运动达人</h3>
-                        <p>业余时间喜欢打羽毛球、跳绳、散步健走等运动，保持良好的体魄。</p>
-                    </div>
-                </div>
+  </div>
 
-                <div class="hobby-item reverse clickable-card">
-                    <img src="/-/assets/hobby_work.png" alt="极简风办公桌与咖啡" width="500" height="333" loading="lazy"
-                        decoding="async" class="hobby-img">
-                    <div class="hobby-content">
-                        <h3><i data-lucide="trending-up" aria-hidden="true"></i> 理财规划</h3>
-                        <p>喜欢研究理财和投资，有很好的储蓄习惯，为未来的生活做足准备。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- FAB 悬浮气泡 -->
+  <button id="fab-connect" class="fab capsule" aria-label="点击跳转到联系方式">
+    <i data-lucide="message-circle" aria-hidden="true"></i>
+    <span>联系我</span>
+  </button>
 
-        <section class="section looking-for" id="expectation">
-            <div class="looking-for-card clickable-card">
-                <div class="heart-icon" aria-hidden="true"><i data-lucide="heart" fill="currentColor"></i></div>
-                <h2 class="section-title center">理想的女孩 <span class="dot"></span></h2>
-                <ul class="expectation-list">
-                    <li>
-                        <i data-lucide="check-circle-2" aria-hidden="true"></i>
-                        <span><strong>发展意愿：</strong>希望你也在运城发展。</span>
-                    </li>
-                    <li>
-                        <i data-lucide="check-circle-2" aria-hidden="true"></i>
-                        <span><strong>性格特征：</strong>性格温柔或开朗皆可。</span>
-                    </li>
-                    <li>
-                        <i data-lucide="check-circle-2" aria-hidden="true"></i>
-                        <span><strong>核心期望：</strong>不仅是寻找伴侣，更希望能找到一个遇事能商量、三观一致、愿意一起经营小日子的人。</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 底部联系方式 -->
-        <footer class="footer" id="contact">
-            <h2>期待遇见你</h2>
-            <!-- P1: 加强的联系转化文案 -->
-            <p class="cta-text">如果你觉得我们合适，欢迎进一步沟通</p>
-            <p class="hint-text">手机端请直接复制微信号 / 微信内长按即可保存二维码</p>
-
-            <div class="contact-box">
-                <div class="qr-image-container">
-                    <img src="/-/assets/wechat-qr.png" alt="G先生的微信二维码" width="170" height="170" loading="lazy"
-                        decoding="async" class="qr-code-img">
-                    <p>微信扫一扫加好友</p>
-                </div>
-                <div class="copy-wechat">
-                    <div id="wechat-id" class="wechat-text">Abcd9981003</div>
-                    <button id="copy-btn" aria-label="一键复制微信号到剪贴板"><i data-lucide="copy"></i>
-                        <span>复制微信号</span></button>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- P0: 重新设计的 FAB 悬浮气泡胶囊 -->
-    <button id="fab-connect" class="fab capsule" aria-label="点击跳转到联系方式">
-        <i data-lucide="message-circle" aria-hidden="true"></i>
-        <span>联系我</span>
+  <!-- 大图预览遮罩 -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+    <button class="close-lightbox" aria-label="关闭预览" tabindex="0">
+      <i data-lucide="x"></i>
     </button>
-
-    <!-- 图片大图预览遮罩层 -->
-    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
-        <button class="close-lightbox" aria-label="关闭预览" tabindex="0">
-            <i data-lucide="x"></i>
-        </button>
-        <img class="lightbox-content" id="lightbox-img" alt="大图预览">
-    </div>
+    <img class="lightbox-content" id="lightbox-img" alt="大图预览">
+  </div>
 
 </body>
 

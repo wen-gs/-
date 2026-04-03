@@ -7,10 +7,10 @@ import { setupLightbox } from './js/lightbox.js';
 import { setupMotion } from './js/motion.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    setupTheme();
-    setupLoader();
-    createIcons({ icons });
-    setupContactAndFab();
-    setupLightbox();
-    setupMotion();
+  setupTheme();
+  setupLoader();
+  createIcons({ icons });
+  setupContactAndFab();
+  setupLightbox();
+  setupMotion();
 });

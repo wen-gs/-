@@ -1,121 +1,152 @@
 /* ===============================
-   布局模块 (Components Layout)
+   Hero 首屏 — Apple 极简风格
+   纯白背景 + 大头像居中 + 大字留白
    =============================== */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 500px; /* P0 优化手机小屏溢出，从 600px 改为 500px */
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  color: #fff;
-  padding: 40px 30px;
+  background: var(--bg-white);
   overflow: hidden;
+  padding: 0;
 }
 
+/* Apple 渐变背景装饰（取代全屏图片）*/
 .hero-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/assets/hero_bg.png') center/cover no-repeat;
-  z-index: 1;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.85) 100%);
-  z-index: 2;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 102, 204, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(88, 86, 214, 0.05) 0%, transparent 60%);
+  z-index: 0;
 }
 
 .hero-content {
   position: relative;
-  z-index: 3;
+  z-index: 2;
   width: 100%;
-  padding-bottom: 20px;
+  padding: 60px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
+/* 头像容器 — Apple 式大尺寸圆形 */
 .avatar-container {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .avatar-placeholder {
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 2px solid #fff;
+  border: 3px solid rgba(0, 0, 0, 0.06);
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+  background: var(--primary-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--secondary-color);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  color: var(--text-light);
 }
 
+/* 大名字 — Apple 风大字重 */
 .name {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  line-height: 1.2;
 }
 
 .highlight {
-  color: #fff;
+  color: var(--primary-accent);
 }
 
+/* 一句话 slogan */
 .subtitle {
   font-size: 16px;
-  opacity: 0.9;
-  margin-bottom: 20px;
-  font-weight: 300;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
+/* 快速基本盘标签行 */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
+  gap: 8px;
+  margin-bottom: 0;
 }
 
 .tag {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 16px;
-  border-radius: 20px;
+  background: var(--primary-light);
+  color: var(--primary-accent);
+  border: 1px solid rgba(0, 102, 204, 0.12);
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
   font-size: 13px;
   font-weight: 500;
-  animation: float 3s ease-in-out infinite;
 }
 
-.tag:nth-child(2) { animation-delay: 0.5s; }
-.tag:nth-child(3) { animation-delay: 1s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+/* Apple 式快速信息摘要栏 — 横排 3 个核心指标 */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: var(--bg-white);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
 }
 
+.hero-stat-item {
+  padding: 20px 16px;
+  text-align: center;
+  border-right: 1px solid var(--card-border);
+}
+
+.hero-stat-item:last-child {
+  border-right: none;
+}
+
+.hero-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.hero-stat-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 3px;
+  letter-spacing: 0.3px;
+}
+
+/* 向下滑动指示器 */
 .scroll-indicator {
   position: absolute;
-  bottom: 20px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  opacity: 0.7;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-light);
+  z-index: 2;
 }
 
 .bounce-icon {
@@ -127,35 +158,40 @@
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
-}
-
-/* ===============================
-   P0级优化：移动端留白压缩与响应式
-   =============================== */
-.section {
-  padding: 50px 30px;
-  background-color: var(--white);
-}
-
-@media (max-width: 500px) {
-  .section {
-    padding: 40px 16px; /* P0：屏效比最大化 */
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(-3px);
   }
 }
 
-.alternate-bg {
+/* ===============================
+   Section 通用布局
+   =============================== */
+.section {
+  padding: 44px 20px;
   background-color: var(--bg-color);
 }
 
+.section-white {
+  background-color: var(--bg-white);
+}
+
 .section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--secondary-color);
-  margin-bottom: 30px;
-  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
 }
 
 .section-title.center {
@@ -164,26 +200,219 @@
 
 .dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: var(--primary-color);
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary-accent);
   border-radius: 50%;
   margin-left: 4px;
+  vertical-align: middle;
 }
 
-.clickable-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+/* ===============================
+   Notion Bento Box 基本信息网格
+   =============================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--bento-gap);
 }
-.clickable-card:active {
+
+.bento-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.18s ease;
+  min-height: 88px;
+  justify-content: center;
+}
+
+.bento-card:active {
   transform: scale(0.98);
 }
 
+/* 跨越两列的大卡片 */
+.bento-card.wide {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  min-height: auto;
+}
 
+/* 超宽强调卡片（比如家庭情况用 full-row + 浅色背景）*/
+.bento-card.highlight-card {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #f0f7ff 0%, #fafafa 100%);
+  border-color: rgba(0, 102, 204, 0.1);
+}
+
+[data-theme='dark'] .bento-card.highlight-card {
+  background: linear-gradient(135deg, #1a2535 0%, #2c2c2e 100%);
+  border-color: rgba(77, 159, 255, 0.15);
+}
+
+.bento-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bento-icon i {
+  width: 18px;
+  height: 18px;
+}
+
+.bento-label {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.bento-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.bento-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* wide 卡片内的文字区域 */
+.bento-card.wide .bento-text {
+  flex: 1;
+}
+
+.bento-card.wide .bento-value {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bento-card.wide .bento-label {
+  margin-bottom: 3px;
+}
+
+/* ===============================
+   Airbnb 生活相册
+   =============================== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--bento-gap);
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  background: #e5e7eb;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+
+.gallery-item img:active {
+  transform: scale(0.96);
+}
+
+.zoom-hint {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.gallery-item:hover .zoom-hint,
+.gallery-item:focus-within .zoom-hint {
+  opacity: 1;
+}
+
+.zoom-hint i {
+  width: 10px;
+  height: 10px;
+}
+
+/* ===============================
+   关于我 — Notion 风格文本块
+   =============================== */
+.about-block {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-xs);
+}
+
+.about-block h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+}
+
+.about-block h3 i {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-accent);
+}
+
+.about-block p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.about-block strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* 爱好卡片 — Airbnb 大圆角图片流 */
 .hobbies-container {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 紧凑间距 */
+  gap: var(--bento-gap);
 }
 
 .hobby-item {
@@ -193,118 +422,141 @@
   overflow: hidden;
   background: var(--card-bg);
   box-shadow: var(--shadow-sm);
-  /*防抖: 增加自身高度保证渲染*/
+  border: 1px solid var(--card-border);
 }
 
 .hobby-img {
   width: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  background-color: var(--primary-light); /* 图片加载前占位色 */
+  background-color: #e5e7eb;
 }
 
 .hobby-content {
-  padding: 24px;
+  padding: 20px 18px;
 }
 
 .hobby-content h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--secondary-color);
+  color: var(--text-main);
+}
+
+.hobby-content h3 i {
+  color: var(--primary-accent);
+  width: 16px;
+  height: 16px;
 }
 
 .hobby-content p {
-  font-size: 14px;
-  color: var(--text-light);
-  line-height: 1.6;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
 }
 
-/* 相册集结与特效 */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+/* ===============================
+   理想的另一半 — Notion Checklist 风格
+   =============================== */
+.looking-for {
+  padding-bottom: 100px;
 }
 
-.gallery-item {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  border-radius: 12px;
-  overflow: hidden;
+.looking-for-card {
+  background: var(--expected-card-bg);
+  border: 1px solid var(--expected-card-border);
+  border-radius: var(--radius-xl);
+  padding: 30px 24px;
   box-shadow: var(--shadow-sm);
-  background: var(--primary-light); /* 占位色 */
 }
 
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-  cursor: pointer;
+.looking-for-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
-.gallery-item img:active {
-  transform: scale(0.95);
-}
-
-/* P2：相册的显式交互提示 */
-.zoom-hint {
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 12px;
-  font-size: 10px;
+.expectation-list {
+  list-style: none;
+  color: var(--text-main);
   display: flex;
-  align-items: center;
-  gap: 4px;
-  opacity: 0.8;
-  pointer-events: none;
-}
-.zoom-hint i {
-  width: 10px;
-  height: 10px;
+  flex-direction: column;
+  gap: 14px;
 }
 
+.expectation-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 12px 14px;
+  background: var(--bg-color);
+  border-radius: var(--radius-sm);
+}
+
+[data-theme='dark'] .expectation-list li {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.expectation-list i {
+  color: var(--primary-accent);
+  flex-shrink: 0;
+  margin-top: 1px;
+  width: 16px;
+  height: 16px;
+}
+
+.expectation-list strong {
+  color: var(--text-main);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+  font-size: 13px;
+}
+
+/* ===============================
+   底部联系方式 Footer
+   =============================== */
 .footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  padding: 60px 30px 50px;
+  padding: 60px 28px 60px;
   text-align: center;
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-top-left-radius: 36px;
+  border-top-right-radius: 36px;
 }
 
 .footer h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
 }
 
-/* P1: CTA转化率强化文案样式 */
 .cta-text {
-  font-size: 16px;
-  color: var(--white);
-  font-weight: 500;
+  font-size: 15px;
+  color: rgba(245, 245, 247, 0.85);
+  font-weight: 400;
   margin-bottom: 4px;
 }
+
 .hint-text {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 30px;
+  font-size: 12px;
+  color: rgba(245, 245, 247, 0.45);
+  margin-bottom: 32px;
 }
 
 .contact-box {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
-  padding: 30px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
@@ -313,26 +565,26 @@
 }
 
 .qr-image-container {
-  width: 200px;
-  background: var(--white);
-  border-radius: 12px;
-  padding: 15px;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 180px;
 }
 
 .qr-code-img {
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .qr-image-container p {
   color: #64748b !important;
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .copy-wechat {
@@ -343,17 +595,19 @@
 }
 
 .wechat-text {
-  font-family: monospace;
-  font-size: 18px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 17px;
   letter-spacing: 1px;
+  color: var(--footer-text);
+  text-align: center;
 }
 
 #copy-btn {
-  background: var(--primary-color);
+  background: var(--primary-accent);
   color: #fff;
   border: none;
-  padding: 12px 20px;
-  border-radius: 30px;
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
   font-size: 15px;
   font-weight: 600;
   display: flex;
@@ -361,14 +615,205 @@
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
+  transition:
+    transform 0.18s ease,
+    opacity 0.2s ease;
+  width: 100%;
 }
 
 #copy-btn:hover {
-  background: #2563eb;
+  opacity: 0.88;
 }
 
 #copy-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
+/* ===============================
+   FAB 悬浮按钮
+   =============================== */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 20px;
+  background-color: var(--primary-accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  outline: none;
+}
+
+.fab.capsule {
+  border-radius: var(--radius-full);
+  padding: 12px 20px;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.fab.capsule i {
+  width: 18px;
+  height: 18px;
+}
+
+.fab:active {
+  transform: scale(0.94);
+}
+
+/* ===============================
+   Lightbox 大图预览
+   =============================== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox[aria-hidden='false'] {
+  display: flex;
+}
+
+.lightbox-content {
+  max-width: 92%;
+  max-height: 82%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  animation: zoomIn 0.25s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 20px;
+  top: max(20px, env(safe-area-inset-top));
+  right: 20px;
+  right: max(20px, env(safe-area-inset-right));
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-lightbox i {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===============================
+   Toast 消息提示
+   =============================== */
+.toast-msg {
+  position: fixed;
+  bottom: 15%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: rgba(0, 0, 0, 0.82);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast-msg.show {
+  opacity: 1;
+  transform: translate(-50%, -20px);
+}
+
+/* 加载动画层 */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-white);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.heart-container {
+  color: var(--primary-accent);
+  margin-bottom: 20px;
+  animation: heart-pulse 1.4s infinite ease-in-out;
+}
+
+.heart-container i {
+  width: 48px;
+  height: 48px;
+}
+
+.loader-text {
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+@keyframes heart-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.clickable-card {
+  cursor: pointer;
+}
