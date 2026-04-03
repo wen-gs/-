@@ -1,5 +1,9 @@
 module.exports = [
   {
+    // 忽略构建产物目录，只 lint 源码
+    ignores: ['docs/**', 'dist/**', 'node_modules/**'],
+  },
+  {
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

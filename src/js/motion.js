@@ -37,7 +37,7 @@ export function setupMotion() {
     sr.reveal('.hero-content .tags', { origin: 'bottom', delay: 400 });
 
     sr.reveal('.section-title', { origin: 'left' });
-    sr.reveal('.info-card', { origin: 'bottom', interval: 100 });
+    sr.reveal('.bento-card', { origin: 'bottom', interval: 100 });
     sr.reveal('.gallery-item', { origin: 'bottom', interval: 100, delay: 200 });
     sr.reveal('.about-block', { origin: 'bottom' });
     sr.reveal('.hobby-item', { origin: 'bottom', interval: 200 });
