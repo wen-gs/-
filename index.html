@@ -20,6 +20,23 @@
   <!-- 字体 & 头像预加载 -->
   <link rel="preload" href="/assets/my-avatar.jpg" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    主题内联脚本：必须放在所有 CSS 加载之前同步执行。
+    type="module" 是 deferred 的，无法在首帧前生效；
+    只有内联 <script> 才能真正消除深色模式 FOUC。
+  -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (systemDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      // 同步 theme-color meta（地址栏颜色）
+      var meta = document.getElementById('theme-color-meta');
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1c1e' : '#ffffff');
+    })();
+  </script>
 </head>
 
 <body class="loading-active">
