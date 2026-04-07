@@ -67,6 +67,10 @@ export function setupMotion() {
               el.addEventListener('transitionend', () => {
                 el.style.willChange = 'auto';
               }, { once: true });
+              // 双重保险：300ms 后强制清理（以防 transitionend 未触发）
+              setTimeout(() => {
+                el.style.willChange = 'auto';
+              }, 300);
               observer.unobserve(el);
             }
           });

@@ -49,10 +49,6 @@
   object-fit: cover;
   box-shadow: var(--shadow-md);
   background: var(--primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-light);
 }
 
 /* 大名字 — Apple 风大字重 */
