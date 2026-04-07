@@ -31,6 +31,7 @@ export function setupContactAndFab() {
         .then(() => {
           copyBtn.classList.add('copied');
           copyBtn.querySelector('.btn-label').textContent = '已复制成功';
+          showToast('✅ 微信号已复制，请前往微信添加');
           setTimeout(() => {
             copyBtn.classList.remove('copied');
             copyBtn.querySelector('.btn-label').textContent = '复制微信号';

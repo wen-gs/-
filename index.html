@@ -24,17 +24,24 @@
     })();
   </script>
 
-  <title>遇见你 | W先生的个人介绍</title>
-  <meta name="description" content="你好，我是 W 先生。95年 / 186cm / IT技术外包，稳重踏实，期待遇见同样热爱生活的你。">
+  <title>你好，我是W先生 | 个人介绍</title>
+  <meta name="description" content="95年 / 186cm / 坐标运城，稳重踏实，期待遇见同样热爱生活的你。">
   <meta name="theme-color" content="#ffffff" id="theme-color-meta">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph 分享标签 -->
-  <meta property="og:url" content="/">
-  <meta property="og:title" content="遇见你 | W先生的个人介绍">
-  <meta property="og:description" content="186cm / IT技术驻场支持 / 热爱运动 / 性格稳重">
-  <meta property="og:image" content="/assets/my-avatar.jpg">
+  <!-- Open Graph 分享标签 (微信/社交媒体) -->
+  <meta property="og:url" content="https://wengaosheng.cn/">
+  <meta property="og:title" content="你好，我是W先生 | 个人介绍">
+  <meta property="og:description" content="95年 / 186cm / 坐标运城，期待遇见三观一致的你。">
+  <meta property="og:image" content="https://wengaosheng.cn/assets/my-avatar.jpg">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="W先生的个人展示页">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="你好，我是W先生 | 个人介绍">
+  <meta name="twitter:description" content="95年 / 186cm / 坐标运城，期待遇见三观一致的你。">
+  <meta name="twitter:image" content="https://wengaosheng.cn/assets/my-avatar.jpg">
 
   <!-- Google Fonts: preconnect 减少 DNS 耗时，display=swap 防字体阻塞渲染 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +64,8 @@
       <div class="heart-container" aria-hidden="true">
         <i data-lucide="heart" fill="currentColor"></i>
       </div>
-      <p class="loader-text">正在加载...</p>
+      <div class="spinner"></div>
+      <p class="loader-text">遇见你 预载中...</p>
     </div>
   </div>
 
@@ -120,8 +128,8 @@
           </div>
           <div class="bento-text">
             <div class="bento-label">职业</div>
-            <div class="bento-value">IT 技术驻场支持</div>
-            <div class="bento-desc">市政务中心信息化项目，负责软件交付与技术支持（纯技术外包非编制内）</div>
+            <div class="bento-value">IT 技术工程师</div>
+            <div class="bento-desc">目前负责市政务中心信息化项目交付与支持，工作踏实稳定。</div>
           </div>
         </div>
 
@@ -217,7 +225,7 @@
             class="hobby-img">
           <div class="hobby-content">
             <h3><i data-lucide="trending-up" aria-hidden="true"></i> 理财规划</h3>
-            <p>喜欢研究理财和投资，有良好的储蓄习惯，为未来的生活做足准备。</p>
+            <p>具备一定的抗风险能力，对未来小家庭有长远的财务规划意识，为未来的稳定生活做足准备。</p>
           </div>
         </div>
       </div>
@@ -289,7 +297,13 @@
     <button class="close-lightbox" aria-label="关闭预览" tabindex="0">
       <i data-lucide="x"></i>
     </button>
+    <button class="lightbox-prev" aria-label="上一张" tabindex="0">
+      <i data-lucide="chevron-left"></i>
+    </button>
     <img class="lightbox-content" id="lightbox-img" alt="大图预览">
+    <button class="lightbox-next" aria-label="下一张" tabindex="0">
+      <i data-lucide="chevron-right"></i>
+    </button>
   </div>
 
   <script type="module" src="/src/main.js"></script>
