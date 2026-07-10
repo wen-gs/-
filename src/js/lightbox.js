@@ -1,7 +1,7 @@
 export function setupLightbox() {
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
-  const zoomableImages = Array.from(document.querySelectorAll('.zoomable'));
+  const zoomableItems = Array.from(document.querySelectorAll('.zoomable'));
   const closeBtn = document.querySelector('.close-lightbox');
   const prevBtn = document.querySelector('.lightbox-prev');
   const nextBtn = document.querySelector('.lightbox-next');
@@ -13,15 +13,16 @@ export function setupLightbox() {
 
   const updateLightbox = (index) => {
     currentIndex = index;
-    const img = zoomableImages[currentIndex];
+    const trigger = zoomableItems[currentIndex];
+    const img = trigger?.querySelector('img');
     if (img) {
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt || '大图预览';
     }
   };
 
-  const openLightbox = (img, index) => {
-    triggerElement = img;
+  const openLightbox = (trigger, index) => {
+    triggerElement = trigger;
     updateLightbox(index);
     lightbox.setAttribute('aria-hidden', 'false');
     lightbox.setAttribute('aria-modal', 'true');
@@ -47,13 +48,13 @@ export function setupLightbox() {
 
   const prevImage = (e) => {
     e.stopPropagation();
-    const newIndex = (currentIndex - 1 + zoomableImages.length) % zoomableImages.length;
+    const newIndex = (currentIndex - 1 + zoomableItems.length) % zoomableItems.length;
     updateLightbox(newIndex);
   };
 
   const nextImage = (e) => {
     e.stopPropagation();
-    const newIndex = (currentIndex + 1) % zoomableImages.length;
+    const newIndex = (currentIndex + 1) % zoomableItems.length;
     updateLightbox(newIndex);
   };
 
@@ -81,11 +82,8 @@ export function setupLightbox() {
     }
   };
 
-  zoomableImages.forEach((img, index) => {
-    img.addEventListener('click', () => openLightbox(img, index));
-    img.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') openLightbox(img, index);
-    });
+  zoomableItems.forEach((trigger, index) => {
+    trigger.addEventListener('click', () => openLightbox(trigger, index));
   });
 
   // 点击遮罩关闭（非图片或按钮区域）

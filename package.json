@@ -1,8 +1,7 @@
 {
   "name": "matchmaking-profile",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "W先生的个人介绍页",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,20 +12,20 @@
     "type": "git",
     "url": "git+https://github.com/wen-gs/-.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "personal-site",
+    "vite"
+  ],
+  "author": "wen-gs",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/wen-gs/-/issues"
   },
-  "homepage": "https://github.com/wen-gs/-#readme",
+  "homepage": "https://wengaosheng.cn/",
   "devDependencies": {
     "eslint": "^10.1.0",
     "eslint-plugin-html": "^8.1.4",
     "prettier": "^3.8.1",
     "vite": "^8.0.3"
-  },
-  "dependencies": {
-    "lucide": "^1.7.0"
   }
 }

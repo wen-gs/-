@@ -1,446 +1,778 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-  <!--
+    <!--
     主题内联脚本：必须是 <head> 内第一个执行的脚本，
     在任何 CSS 和外链资源解析前同步写入 data-theme，
     彻底消除深色模式 FOUC。
   -->
-  <script>
-    (function () {
-      var saved = localStorage.getItem('theme');
-      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = saved ? saved : (systemDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      // 地址栏颜色同步（theme-color meta 此时可能还未解析，用 querySelector 延迟到 DOM ready）
-      document.addEventListener('DOMContentLoaded', function () {
-        var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1c1e' : '#ffffff');
-      }, { once: true });
-    })();
-  </script>
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved ? saved : systemDark ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        // 地址栏颜色同步（theme-color meta 此时可能还未解析，用 querySelector 延迟到 DOM ready）
+        document.addEventListener(
+          'DOMContentLoaded',
+          function () {
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1c1e' : '#ffffff');
+          },
+          { once: true }
+        );
+      })();
+    </script>
 
-  <title>你好，我是W先生 | 个人介绍</title>
-  <meta name="description" content="95年 / 186cm / 坐标运城，踏实稳重，生活简单，期待遇见真诚的你。">
-  <meta name="theme-color" content="#ffffff" id="theme-color-meta">
-  <meta name="robots" content="index, follow">
+    <title>你好，我是 W 先生 | 在运城认真认识一个人</title>
+    <meta
+      name="description"
+      content="95年，现居运城。喜欢运动、写点东西，也想认真认识一个能把日子过到一起的人。"
+    />
+    <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <link rel="canonical" href="https://wengaosheng.cn/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-  <!-- Open Graph 分享标签 (微信/社交媒体) -->
-  <meta property="og:url" content="https://wengaosheng.cn/">
-  <meta property="og:title" content="你好，我是W先生 | 个人介绍">
-  <meta property="og:description" content="95年 / 186cm / 坐标运城，踏实稳重，生活简单，期待遇见真诚的你。">
-  <meta property="og:image" content="https://wengaosheng.cn/assets/my-avatar.jpg">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="W先生的个人展示页">
+    <!-- Open Graph 分享标签 (微信/社交媒体) -->
+    <meta property="og:url" content="https://wengaosheng.cn/" />
+    <meta property="og:title" content="你好，我是 W 先生" />
+    <meta
+      property="og:description"
+      content="95年，现居运城。喜欢运动、写点东西，也想认真认识一个能把日子过到一起的人。"
+    />
+    <meta property="og:image" content="https://wengaosheng.cn/assets/my-avatar.jpg" />
+    <meta property="og:image:width" content="1440" />
+    <meta property="og:image:height" content="1920" />
+    <meta property="og:image:alt" content="W先生的生活照" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="W先生的个人展示页" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="你好，我是W先生 | 个人介绍">
-  <meta name="twitter:description" content="95年 / 186cm / 坐标运城，踏实稳重，生活简单，期待遇见真诚的你。">
-  <meta name="twitter:image" content="https://wengaosheng.cn/assets/my-avatar.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="你好，我是 W 先生" />
+    <meta
+      name="twitter:description"
+      content="95年，现居运城。喜欢运动、写点东西，也想认真认识一个能把日子过到一起的人。"
+    />
+    <meta name="twitter:image" content="https://wengaosheng.cn/assets/my-avatar.jpg" />
 
-  <!-- Google Fonts: preconnect 减少 DNS 耗时，display=swap 防字体阻塞渲染 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 头像预加载（首屏关键图） -->
+    <link rel="preload" href="/assets/my-avatar-192.jpg" as="image" fetchpriority="high" />
+  </head>
 
-  <!-- 头像预加载（首屏关键图） -->
-  <link rel="preload" href="/assets/my-avatar-192.jpg" as="image" fetchpriority="high">
-</head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="切换深色与浅色主题" tabindex="0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+        />
+      </svg>
+    </button>
 
-<body class="loading-active">
-  <!-- 主题切换按钮 -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="切换深色与浅色主题" tabindex="0">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path
-        d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
-    </svg>
-  </button>
+    <div class="app-container">
+      <main id="main-content">
+        <!-- Apple 极简首屏 -->
+        <header class="hero" id="hero">
+          <!-- 柔和渐变装饰背景 -->
+          <div class="hero-bg" aria-hidden="true"></div>
 
-  <!-- 加载动画层 -->
-  <div id="page-loader" class="page-loader" role="status" aria-label="页面加载中">
-    <div class="loader-content">
-      <div class="heart-container" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path
-            d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-        </svg>
-      </div>
-      <div class="spinner"></div>
-      <p class="loader-text">遇见你 预载中...</p>
-    </div>
-  </div>
+          <div class="hero-content">
+            <!-- 头像 -->
+            <div class="avatar-container">
+              <img
+                src="/assets/my-avatar-192.jpg"
+                class="avatar-placeholder"
+                alt="W先生个人头像"
+                width="96"
+                height="96"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </div>
 
-  <div class="app-container">
+            <p class="eyebrow">在运城生活 · 想认真认识一个人</p>
+            <h1 class="name">你好，我是 <span class="highlight">W先生</span></h1>
+            <p class="subtitle">95年，186cm，IT 技术工程师。下班后会打球、散步，有空写点东西。</p>
 
-    <!-- Apple 极简首屏 -->
-    <header class="hero" id="hero">
-      <!-- 柔和渐变装饰背景 -->
-      <div class="hero-bg" aria-hidden="true"></div>
+            <!-- 个性标签 -->
+            <div class="tags">
+              <span class="tag">羽毛球</span>
+              <span class="tag">公众号写作</span>
+              <span class="tag">收支有计划</span>
+            </div>
 
-      <div class="hero-content">
-        <!-- 头像 -->
-        <div class="avatar-container">
-          <img src="/assets/my-avatar-192.jpg" class="avatar-placeholder" alt="W先生个人头像" width="96" height="96"
-            decoding="async" fetchpriority="high">
-        </div>
+            <a class="hero-link" href="#about">再多了解一点</a>
+          </div>
 
-        <!-- 大标题 + 一句话 -->
-        <h1 class="name">你好，我是 <span class="highlight">W先生</span></h1>
-        <p class="subtitle">95年 · 186cm · 运城盐湖区</p>
+          <!-- Apple 式核心数据统计栏 -->
+          <div class="hero-stats" role="list" aria-label="基本信息摘要">
+            <div class="hero-stat-item" role="listitem">
+              <div class="hero-stat-value">186</div>
+              <div class="hero-stat-label">身高 cm</div>
+            </div>
+            <div class="hero-stat-item" role="listitem">
+              <div class="hero-stat-value">运城</div>
+              <div class="hero-stat-label">现居城市</div>
+            </div>
+            <div class="hero-stat-item" role="listitem">
+              <div class="hero-stat-value">本科</div>
+              <div class="hero-stat-label">学历</div>
+            </div>
+          </div>
 
-        <!-- 个性标签 -->
-        <div class="tags">
-          <span class="tag">稳重踏实</span>
-          <span class="tag">生活简单</span>
-          <span class="tag">热爱运动</span>
-        </div>
-      </div>
-
-      <!-- Apple 式核心数据统计栏 -->
-      <div class="hero-stats" role="list" aria-label="基本信息摘要">
-        <div class="hero-stat-item" role="listitem">
-          <div class="hero-stat-value">186</div>
-          <div class="hero-stat-label">身高 cm</div>
-        </div>
-        <div class="hero-stat-item" role="listitem">
-          <div class="hero-stat-value">31</div>
-          <div class="hero-stat-label">年龄 岁</div>
-        </div>
-        <div class="hero-stat-item" role="listitem">
-          <div class="hero-stat-value">本科</div>
-          <div class="hero-stat-label">学历</div>
-        </div>
-      </div>
-
-      <!-- 向下滑动提示 -->
-      <div class="scroll-indicator" id="scroll-bounce" aria-hidden="true">
-        <svg class="bounce-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </div>
-    </header>
-
-    <!-- Notion Bento Box 基本情况 -->
-    <section class="section section-white" id="info">
-      <h2 class="section-title">基本情况 <span class="dot"></span></h2>
-
-      <div class="bento-grid">
-        <!-- 职业（大卡片，最重要优先展示）-->
-        <div class="bento-card wide highlight-card">
-          <div class="bento-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-              <rect width="20" height="14" x="2" y="6" rx="2" />
+          <!-- 向下滑动提示 -->
+          <div class="scroll-indicator" id="scroll-bounce" aria-hidden="true">
+            <svg
+              class="bounce-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
             </svg>
           </div>
-          <div class="bento-text">
-            <div class="bento-label">职业</div>
-            <div class="bento-value">IT 技术工程师</div>
-            <div class="bento-desc">目前负责市政务中心信息化项目交付与支持，工作踏实稳定。</div>
+        </header>
+
+        <!-- Notion Bento Box 基本情况 -->
+        <section class="section section-white" id="info">
+          <h2 class="section-title">基本情况 <span class="dot"></span></h2>
+
+          <div class="bento-grid">
+            <!-- 职业（大卡片，最重要优先展示）-->
+            <div class="bento-card wide highlight-card">
+              <div class="bento-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  <rect width="20" height="14" x="2" y="6" rx="2" />
+                </svg>
+              </div>
+              <div class="bento-text">
+                <div class="bento-label">职业</div>
+                <div class="bento-value">IT 技术工程师</div>
+                <div class="bento-desc">
+                  做信息化项目交付与支持，工作稳定，也习惯把事情一件件做妥。
+                </div>
+              </div>
+            </div>
+
+            <!-- 籍贯现居 -->
+            <div class="bento-card">
+              <div class="bento-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                  />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div class="bento-label">现居</div>
+              <div class="bento-value">运城</div>
+              <div class="bento-desc">万荣人，已定居</div>
+            </div>
+
+            <!-- 体重 -->
+            <div class="bento-card">
+              <div class="bento-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                  />
+                </svg>
+              </div>
+              <div class="bento-label">体重</div>
+              <div class="bento-value">85 kg</div>
+              <div class="bento-desc">身高比较高，整体形象干净自然。</div>
+            </div>
+
+            <!-- 购房置业 -->
+            <div class="bento-card wide">
+              <div class="bento-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                  <path
+                    d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  />
+                </svg>
+              </div>
+              <div class="bento-text">
+                <div class="bento-label">资产情况</div>
+                <div class="bento-value">运城已购房 · 有车</div>
+              </div>
+            </div>
+
+            <!-- 家庭 -->
+            <div class="bento-card wide">
+              <div class="bento-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg>
+              </div>
+              <div class="bento-text">
+                <div class="bento-label">家庭</div>
+                <div class="bento-value">父母健康，家里关系和睦</div>
+                <div class="bento-desc">家人相处开明，有事愿意坐下来商量。</div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <!-- 籍贯现居 -->
-        <div class="bento-card">
-          <div class="bento-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path
-                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
+        <!-- Airbnb 生活相册 -->
+        <section class="section" id="gallery">
+          <h2 class="section-title">生活剪影 <span class="dot"></span></h2>
+
+          <div class="gallery-grid">
+            <button
+              type="button"
+              class="gallery-item zoomable"
+              aria-label="放大查看图书馆里的生活照"
+            >
+              <img
+                src="/assets/photo-1.jpg"
+                alt="阳光下在图书馆看书的日常"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+              />
+              <div class="zoom-hint">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                  <line x1="11" x2="11" y1="8" y2="14" />
+                  <line x1="8" x2="14" y1="11" y2="11" /></svg
+                >放大
+              </div>
+            </button>
+            <button type="button" class="gallery-item zoomable" aria-label="放大查看生活照">
+              <img
+                src="/assets/life-gallery-middle.jpg"
+                alt="生活剪影照片"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+              />
+              <div class="zoom-hint">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                  <line x1="11" x2="11" y1="8" y2="14" />
+                  <line x1="8" x2="14" y1="11" y2="11" /></svg
+                >放大
+              </div>
+            </button>
+            <button type="button" class="gallery-item zoomable" aria-label="放大查看正装照">
+              <img
+                src="/assets/正装照片.jpg"
+                alt="正装照"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+              />
+              <div class="zoom-hint">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                  <line x1="11" x2="11" y1="8" y2="14" />
+                  <line x1="8" x2="14" y1="11" y2="11" /></svg
+                >放大
+              </div>
+            </button>
+            <button type="button" class="gallery-item zoomable" aria-label="放大查看运动日常">
+              <img
+                src="/assets/photo-2.jpg"
+                alt="傍晚跑道上的运动鞋"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+              />
+              <div class="zoom-hint">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                  <line x1="11" x2="11" y1="8" y2="14" />
+                  <line x1="8" x2="14" y1="11" y2="11" /></svg
+                >放大
+              </div>
+            </button>
+            <button type="button" class="gallery-item zoomable" aria-label="放大查看旅行照片">
+              <img
+                src="/assets/photo-3.jpg"
+                alt="旅行时拍摄的建筑"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+              />
+              <div class="zoom-hint">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                  <line x1="11" x2="11" y1="8" y2="14" />
+                  <line x1="8" x2="14" y1="11" y2="11" /></svg
+                >放大
+              </div>
+            </button>
           </div>
-          <div class="bento-label">现居</div>
-          <div class="bento-value">运城盐湖区</div>
-          <div class="bento-desc">万荣人，已定居</div>
-        </div>
+        </section>
 
-        <!-- 体重 -->
-        <div class="bento-card">
-          <div class="bento-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path
-                d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-            </svg>
-          </div>
-          <div class="bento-label">体重</div>
-          <div class="bento-value">85 kg</div>
-          <div class="bento-desc">身高比较高，整体形象干净自然。</div>
-        </div>
+        <!-- 日常与性格 -->
+        <section class="section section-white" id="about">
+          <p class="section-kicker">日常里的我</p>
+          <h2 class="story-title">日子不复杂，也不敷衍</h2>
 
-        <!-- 购房置业 -->
-        <div class="bento-card wide">
-          <div class="bento-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-              <path
-                d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            </svg>
-          </div>
-          <div class="bento-text">
-            <div class="bento-label">资产情况</div>
-            <div class="bento-value">盐湖区已购房 · 有车</div>
-          </div>
-        </div>
-
-        <!-- 家庭 -->
-        <div class="bento-card wide">
-          <div class="bento-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-              <circle cx="9" cy="7" r="4" />
-            </svg>
-          </div>
-          <div class="bento-text">
-            <div class="bento-label">家庭</div>
-            <div class="bento-value">父母健康，家庭开明和睦</div>
-            <div class="bento-desc">家有两妹，大妹已实习即将独立，小妹优学上进</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Airbnb 生活相册 -->
-    <section class="section" id="gallery">
-      <h2 class="section-title">生活剪影 <span class="dot"></span></h2>
-
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="/assets/photo-1.jpg" alt="阳光下在图书馆看书的日常" loading="lazy" decoding="async" width="400" height="400"
-            class="zoomable" tabindex="0">
-          <div class="zoom-hint"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" x2="16.65" y1="21" y2="16.65" />
-              <line x1="11" x2="11" y1="8" y2="14" />
-              <line x1="8" x2="14" y1="11" y2="11" />
-            </svg>放大</div>
-        </div>
-        <div class="gallery-item">
-          <img src="/assets/life-gallery-middle.jpg" alt="生活剪影照片" loading="lazy" decoding="async" width="400"
-            height="400" class="zoomable" tabindex="0">
-          <div class="zoom-hint"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" x2="16.65" y1="21" y2="16.65" />
-              <line x1="11" x2="11" y1="8" y2="14" />
-              <line x1="8" x2="14" y1="11" y2="11" />
-            </svg>放大</div>
-        </div>
-        <div class="gallery-item">
-          <img src="/assets/正装照片.jpg" alt="正装照" loading="lazy" decoding="async" width="400" height="400"
-            class="zoomable" tabindex="0">
-          <div class="zoom-hint"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" x2="16.65" y1="21" y2="16.65" />
-              <line x1="11" x2="11" y1="8" y2="14" />
-              <line x1="8" x2="14" y1="11" y2="11" />
-            </svg>放大</div>
-        </div>
-        <div class="gallery-item">
-          <img src="/assets/photo-2.jpg" alt="傍晚跑道上的运动鞋" loading="lazy" decoding="async" width="400" height="400"
-            class="zoomable" tabindex="0">
-          <div class="zoom-hint"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" x2="16.65" y1="21" y2="16.65" />
-              <line x1="11" x2="11" y1="8" y2="14" />
-              <line x1="8" x2="14" y1="11" y2="11" />
-            </svg>放大</div>
-        </div>
-        <div class="gallery-item">
-          <img src="/assets/photo-3.jpg" alt="旅行时拍摄的建筑" loading="lazy" decoding="async" width="400" height="400"
-            class="zoomable" tabindex="0">
-          <div class="zoom-hint"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" x2="16.65" y1="21" y2="16.65" />
-              <line x1="11" x2="11" y1="8" y2="14" />
-              <line x1="8" x2="14" y1="11" y2="11" />
-            </svg>放大</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Notion 风格 关于我 -->
-    <section class="section section-white" id="about">
-      <h2 class="section-title">关于我 <span class="dot"></span></h2>
-
-      <div class="about-block">
-        <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" />
-            <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" />
-          </svg> 性格与生活习惯</h3>
-        <p>性格沉稳踏实，生活圈子简单，<strong>不抽烟、不喝酒、不吃槟榔，</strong>平时更喜欢运动和安静的生活。</p>
-      </div>
-
-      <div class="hobbies-container">
-        <div class="hobby-item clickable-card">
-          <img src="/assets/hobby_badminton.jpg" alt="羽毛球运动" width="500" height="281" loading="lazy" decoding="async"
-            class="hobby-img">
-          <div class="hobby-content">
-            <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                aria-hidden="true">
+          <div class="about-block">
+            <h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
                 <path
-                  d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-              </svg> 运动与写作</h3>
-            <p>业余时间喜欢打羽毛球、跳绳、散步健走，也在坚持让身体状态越来越好。平时也会写写公众号文章，记录一些生活感受、社会观察和个人思考，这个习惯让我更愿意观察生活，也更懂得复盘自己。</p>
+                  d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+                />
+              </svg>
+              我的生活习惯
+            </h3>
+            <p>
+              我不抽烟、不喝酒，也不吃槟榔。生活圈子不大，下班后更愿意去动一动，或者安静做自己的事。
+            </p>
+          </div>
+
+          <div class="hobbies-container">
+            <div class="hobby-item clickable-card">
+              <img
+                src="/assets/hobby_badminton.jpg"
+                alt="羽毛球运动"
+                width="500"
+                height="281"
+                loading="lazy"
+                decoding="async"
+                class="hobby-img"
+              />
+              <div class="hobby-content">
+                <h3>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                    />
+                  </svg>
+                  运动与写作
+                </h3>
+                <p>
+                  我喜欢打羽毛球、跳绳和散步。安静下来时会写公众号，把生活里遇到的人和事记下来。运动让我保持状态，写东西让我慢下来想一想。
+                </p>
+              </div>
+            </div>
+
+            <div class="hobby-item clickable-card">
+              <img
+                src="/assets/hobby_work.jpg"
+                alt="极简办公桌"
+                width="500"
+                height="281"
+                loading="lazy"
+                decoding="async"
+                class="hobby-img"
+              />
+              <div class="hobby-content">
+                <h3>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 7h6v6" />
+                    <path d="m22 7-8.5 8.5-5-5L2 17" />
+                  </svg>
+                  花钱与生活
+                </h3>
+                <p>我会记得钱花去了哪里，需要的东西也舍得买。日常开支有计划，也愿意为以后的家庭生活做准备。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 相处方式 -->
+        <section class="section section-white" id="relationship">
+          <p class="section-kicker">我理解的相处</p>
+          <h2 class="story-title">有话能说，有事能商量</h2>
+          <div class="relationship-note">
+            <p>
+              我不太会说漂亮话，答应的事会放在心上。两个人意见不一样时，我愿意先把话听完，再一起找办法。
+            </p>
+            <p>
+              我希望我们各自有喜欢的事，也能一起吃饭、散步，聊聊当天发生了什么。日子里的小事有人回应，遇到难处有人站在身边。
+            </p>
+          </div>
+        </section>
+
+        <!-- Notion Checklist 理想的另一半 -->
+        <section class="section looking-for" id="expectation">
+          <div class="looking-for-card">
+            <p class="section-kicker">想认识这样的你</p>
+            <h2 class="looking-for-heading">真诚，愿意一起过日子</h2>
+            <ul class="expectation-list">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <div>
+                  <strong>愿意留在运城</strong>
+                  两个人离得近，见面和相处都不用靠想象。
+                </div>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <div>
+                  <strong>愿意表达自己</strong>
+                  温柔或开朗都好，有话愿意说，彼此不用猜。
+                </div>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <div>
+                  <strong>认真对待关系</strong>
+                  遇事能商量，也愿意一起照顾眼前的生活和以后的家。
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <!-- 底部联系方式 -->
+      <footer class="footer" id="contact">
+        <h2>期待遇见你</h2>
+        <p class="cta-text">如果觉得合适，欢迎主动联系</p>
+        <p class="hint-text">手机端长按即可保存二维码 / 或直接复制微信号</p>
+
+        <div class="contact-box">
+          <div class="qr-image-container">
+            <img
+              src="/assets/wechat-qr.jpg"
+              alt="W先生的微信二维码"
+              width="170"
+              height="170"
+              loading="lazy"
+              decoding="async"
+              class="qr-code-img"
+            />
+            <p>微信扫一扫</p>
+          </div>
+          <div class="copy-wechat">
+            <div id="wechat-id" class="wechat-text">Abcd9981003</div>
+            <button id="copy-btn" aria-label="一键复制微信号到剪贴板">
+              <svg
+                class="btn-icon-copy"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+              </svg>
+              <svg
+                class="btn-icon-check"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              <span class="btn-label">复制微信号</span>
+            </button>
           </div>
         </div>
+      <p class="privacy-note">页面不使用访问统计脚本，也不会提交表单信息。</p>
+      </footer>
+    </div>
 
-        <div class="hobby-item clickable-card">
-          <img src="/assets/hobby_work.jpg" alt="极简办公桌" width="500" height="281" loading="lazy" decoding="async"
-            class="hobby-img">
-          <div class="hobby-content">
-            <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                aria-hidden="true">
-                <path d="M16 7h6v6" />
-                <path d="m22 7-8.5 8.5-5-5L2 17" />
-              </svg> 生活规划</h3>
-            <p>平时比较重视收支规划，不乱花钱，也愿意为了以后的家庭生活一步步打基础。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 相处方式 -->
-    <section class="section section-white" id="relationship">
-      <h2 class="section-title">关于相处 <span class="dot"></span></h2>
-      <div class="about-block">
-        <p>我不是特别会花言巧语的人，但比较重视责任感和稳定感。遇到事情愿意沟通，也愿意一起商量解决。希望两个人相处起来轻松、踏实，既能过好眼前的小日子，也能一起为以后努力。</p>
-      </div>
-    </section>
-
-    <!-- Notion Checklist 理想的另一半 -->
-    <section class="section looking-for" id="expectation">
-      <div class="looking-for-card">
-        <h2 class="looking-for-heading">理想的另一半</h2>
-        <ul class="expectation-list">
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            <div>
-              <strong>发展意愿</strong>
-              希望你也在运城发展，一起经营本地的小日子。
-            </div>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            <div>
-              <strong>性格特征</strong>
-              性格温柔或开朗皆可，真诚最重要。
-            </div>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            <div>
-              <strong>核心期望</strong>
-              不只是寻找伴侣，更希望找到一个遇事能商量、三观一致、愿意一起把日子过好的人。
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 底部联系方式 -->
-    <footer class="footer" id="contact">
-      <h2>期待遇见你</h2>
-      <p class="cta-text">如果觉得合适，欢迎主动联系</p>
-      <p class="hint-text">手机端长按即可保存二维码 / 或直接复制微信号</p>
-
-      <div class="contact-box">
-        <div class="qr-image-container">
-          <img src="/assets/wechat-qr.jpg" alt="W先生的微信二维码" width="170" height="170" loading="lazy" decoding="async"
-            class="qr-code-img">
-          <p>微信扫一扫</p>
-        </div>
-        <div class="copy-wechat">
-          <div id="wechat-id" class="wechat-text">Abcd9981003</div>
-          <button id="copy-btn" aria-label="一键复制微信号到剪贴板">
-            <svg class="btn-icon-copy" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-            </svg>
-            <svg class="btn-icon-check" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            <span class="btn-label">复制微信号</span>
-          </button>
-        </div>
-      </div>
-    </footer>
-
-  </div>
-
-  <!-- FAB 悬浮气泡（CSS 默认隐藏，JS 控制显示） -->
-  <button id="fab-connect" class="fab capsule fab-hidden" aria-label="点击跳转到联系方式">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path
-        d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-    </svg>
-    <span>联系我</span>
-  </button>
-
-  <!-- 大图预览遮罩 -->
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
-    <button class="close-lightbox" aria-label="关闭预览" tabindex="0">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
+    <!-- FAB 悬浮气泡（CSS 默认隐藏，JS 控制显示） -->
+    <button id="fab-connect" class="fab capsule fab-hidden" aria-label="点击跳转到联系方式">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path
+          d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"
+        />
       </svg>
+      <span>联系我</span>
     </button>
-    <button class="lightbox-prev" aria-label="上一张" tabindex="0">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m15 18-6-6 6-6" />
-      </svg>
-    </button>
-    <img class="lightbox-content" id="lightbox-img" alt="大图预览">
-    <button class="lightbox-next" aria-label="下一张" tabindex="0">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m9 18 6-6-6-6" />
-      </svg>
-    </button>
-  </div>
 
-  <script type="module" src="/src/main.js"></script>
-</body>
+    <!-- 大图预览遮罩 -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+      <button class="close-lightbox" aria-label="关闭预览" tabindex="0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+      <button class="lightbox-prev" aria-label="上一张" tabindex="0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+      <img class="lightbox-content" id="lightbox-img" alt="大图预览" />
+      <button class="lightbox-next" aria-label="下一张" tabindex="0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+    </div>
 
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
