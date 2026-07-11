@@ -356,6 +356,18 @@ body {
   content: '02';
 }
 
+.hobby-thumbnail {
+  position: absolute;
+  z-index: 2;
+  top: 22px;
+  right: 22px;
+  width: clamp(108px, 28%, 146px);
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(63, 45, 36, 0.12);
+}
+
 .hobby-content {
   position: relative;
   z-index: 1;
@@ -363,7 +375,9 @@ body {
 }
 
 .hobby-content .hobby-note {
-  margin-bottom: 26px;
+  min-height: 78px;
+  margin-bottom: 18px;
+  padding-right: 124px;
   color: var(--primary-accent);
   font-size: 12px;
   font-weight: 600;
