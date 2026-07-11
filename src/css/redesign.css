@@ -356,15 +356,21 @@ body {
   content: '02';
 }
 
+.hobby-topline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(96px, 28%, 126px);
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
 .hobby-thumbnail {
-  position: absolute;
-  z-index: 2;
-  top: 22px;
-  right: 22px;
-  width: clamp(108px, 28%, 146px);
-  aspect-ratio: 16 / 10;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
   border-radius: 12px;
-  object-fit: cover;
+  object-fit: contain;
   box-shadow: 0 10px 24px rgba(63, 45, 36, 0.12);
 }
 
@@ -375,9 +381,9 @@ body {
 }
 
 .hobby-content .hobby-note {
-  min-height: 78px;
-  margin-bottom: 18px;
-  padding-right: 124px;
+  min-height: 0;
+  margin: 2px 0 0;
+  padding: 0;
   color: var(--primary-accent);
   font-size: 12px;
   font-weight: 600;
