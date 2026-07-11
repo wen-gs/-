@@ -352,6 +352,10 @@ body {
   background: #eee7df;
 }
 
+[data-theme='dark'] .hobby-item:nth-child(2) {
+  background: #3a312c;
+}
+
 .hobby-item:nth-child(2)::after {
   content: '02';
 }
